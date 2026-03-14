@@ -1,0 +1,112 @@
+[
+  {
+    "ticker": "WGLD",
+    "valueInvested": 311.31551199999996,
+    "percentage": 3.1803219689166426
+  },
+  {
+    "ticker": "XSOE",
+    "valueInvested": 61.02621924,
+    "percentage": 0.6234287025469374
+  },
+  {
+    "ticker": "HEDF",
+    "valueInvested": 89.68601231999999,
+    "percentage": 0.91621003223837
+  },
+  {
+    "ticker": "CEB1",
+    "valueInvested": 25.313581332000002,
+    "percentage": 0.2585972613601015
+  },
+  {
+    "ticker": "WCOA",
+    "valueInvested": 339.85850832000006,
+    "percentage": 3.471910131909315
+  },
+  {
+    "ticker": "BARC",
+    "valueInvested": 7304.060771625,
+    "percentage": 74.61647119691625
+  },
+  {
+    "ticker": "SPY4",
+    "valueInvested": 40.861474,
+    "percentage": 0.41743067221307056
+  },
+  {
+    "ticker": "DTLA",
+    "valueInvested": 30.27159996,
+    "percentage": 0.30924714855533497
+  },
+  {
+    "ticker": "DGRA",
+    "valueInvested": 240.134905395,
+    "percentage": 2.453158566449584
+  },
+  {
+    "ticker": "DHSA",
+    "valueInvested": 89.04766425000001,
+    "percentage": 0.9096888268612462
+  },
+  {
+    "ticker": "HYEA",
+    "valueInvested": 42.45006504,
+    "percentage": 0.4336593238201775
+  },
+  {
+    "ticker": "DXJZ",
+    "valueInvested": 86.23135989,
+    "percentage": 0.8809181608262565
+  },
+  {
+    "ticker": "WMGT",
+    "valueInvested": 92.19406845,
+    "percentage": 0.9418317108957287
+  },
+  {
+    "ticker": "DGSE",
+    "valueInvested": 41.58031725,
+    "percentage": 0.4247741963615955
+  },
+  {
+    "ticker": "IUS3",
+    "valueInvested": 29.43193737,
+    "percentage": 0.30066936402960137
+  },
+  {
+    "ticker": "EMGA",
+    "valueInvested": 38.53883891,
+    "percentage": 0.39370320885909643
+  },
+  {
+    "ticker": "SIE",
+    "valueInvested": 69.852205995,
+    "percentage": 0.7135927916858488
+  },
+  {
+    "ticker": "EUNU",
+    "valueInvested": 278.574334738,
+    "percentage": 2.845846231856253
+  },
+  {
+    "ticker": "TFRN",
+    "valueInvested": 72.77882792,
+    "percentage": 0.743490434572306
+  },
+  {
+    "ticker": "WTEM",
+    "valueInvested": 182.55372953499997,
+    "percentage": 1.8649235716459496
+  },
+  {
+    "ticker": "QGRW",
+    "valueInvested": 150.793754875,
+    "percentage": 1.5404715567285758
+  },
+  {
+    "ticker": "IMBA",
+    "valueInvested": 172.24918866000002,
+    "percentage": 1.7596549407517654
+  }
+]
