@@ -132,11 +132,10 @@ export class GraphService {
       (record) => record.get('common_node_ticker') as string,
     );
 
-
     return {
       nodes: Array.from(nodesMap.values()),
       edges: Array.from(edgesMap.values()),
-      company_to_corelations: company_to_percents_used,
+      company_to_percents: {},
     };
   }
 
@@ -169,7 +168,7 @@ export class GraphService {
     )
     `;
 
-    const response = this.makeRequest(query, {
+    await this.makeRequest(query, {
       company_ticker: payload.ticker,
       company_name: payload.name,
       company_sector: payload.sector,
