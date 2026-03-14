@@ -48,74 +48,6 @@ export class GraphService {
     return cleaned;
   }
 
-  async createCompanyRelation(
-    payload: CreateCompanyRelationRequest,
-  ): Promise<Record<string, unknown>> {
-    const relType = this.clearRelationshipType(payload.relation_type);
-
-    const query = `
-      MERGE (c1:Company {name: $source_company_name})
-      ON CREATE SET c1.created_at = timestamp()
-      MERGE (c2:Company {name: $target_company_name})
-      ON CREATE SET c2.created_at = timestamp()
-      MERGE (c1)-[r:${relType}]->(c2)
-      RETURN
-        elementId(c1) AS source_id,
-        c1.name AS source_name,
-        elementId(c2) AS target_id,
-        c2.name AS target_name,
-        elementId(r) AS relation_id,
-        type(r) AS relation_type
-    `;
-
-    const result = await this.makeRequest(query, {
-      source_company_name: payload.source_company_name,
-      target_company_name: payload.target_company_name,
-    });
-
-    if (result.records.length === 0) {
-      throw new HttpException(
-        'Failed to create relation',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
-    const record = result.records[0];
-
-    return {
-      message: 'Relation created successfully',
-      source_company: {
-        id: record.get('source_id'),
-        name: record.get('source_name'),
-      },
-      target_company: {
-        id: record.get('target_id'),
-        name: record.get('target_name'),
-      },
-      relationship: {
-        id: record.get('relation_id'),
-        type: record.get('relation_type'),
-      },
-    };
-  }
-
-  // async getCompanies(): Promise<CompanyResponse[]> {
-  //   const query = `
-  //     MATCH (c:Company)
-  //     RETURN
-  //       elementId(c) AS id,
-  //       c.name AS name
-  //     ORDER BY c.name
-  //   `;
-  //
-  //   const result = await this.makeRequest(query);
-  //
-  //   return result.records.map((record) => ({
-  //     id: record.get('id'),
-  //     name: record.get('name'),
-  //   }));
-  // }
-
   async getGraph(filters: GraphFilterItem[]): Promise<GraphResponse> {
     let query = `
       MATCH (seed:Company)
@@ -185,81 +117,25 @@ export class GraphService {
     }
 
     query = `
-    MATCH (startNode)
-    WHERE startNode.ticker IN $entity_ids
-    // Traverse 1 or more hops
-    MATCH (startNode)-[*1..]-(connectedNode)
-    // Return distinct pairs to avoid duplicates from multiple paths
-    RETURN DISTINCT startNode.id AS source_id, connectedNode.id AS target_id
+      MATCH (startNode:Company)
+      WHERE startNode.ticker IN $entity_ids
+      MATCH (startNode)-[*1..3]-(connectedNode)
+      WHERE startNode <> connectedNode
+      RETURN connectedNode.ticker AS common_node_ticker, 
+             count(DISTINCT startNode) AS neighbor_count
+      ORDER BY neighbor_count DESC
+      LIMIT 5
     `;
     result = await this.makeRequest(query, { entity_ids: entity_ids });
 
-    const entity_to_percent = filters.reduce(
-      (acc, item) => {
-        acc[item.entity_id] = item.percent;
-        return acc;
-      },
-      {} as Record<string, number>,
-    );
-
-    const company_to_percents_used = result.records.reduce(
-      (acc, record) => {
-        acc[record.get('target_id')] = acc[record.get('target_id')] ?? 0;
-        acc[record.get('target_id')] +=
-          entity_to_percent[record.get('source_id')] ?? 0;
-        return acc;
-      },
-      {} as Record<string, number>,
+    const connectedNodes = result.records.map(
+      (record) => record.get('common_node_ticker') as string,
     );
 
     return {
       nodes: Array.from(nodesMap.values()),
       edges: Array.from(edgesMap.values()),
-      company_to_percents: company_to_percents_used,
-    };
-  }
-
-  async createEdge(payload: CreateEdgeDto): Promise<Record<string, unknown>> {
-    const query = `
-      MERGE (source:Company {name: $source})
-      ON CREATE SET source.created_at = timestamp()
-      MERGE (target:Company {name: $target})
-      ON CREATE SET target.created_at = timestamp()
-      MERGE (source)-[r:RELATED_TO]->(target)
-      RETURN
-        elementId(source) AS source_id,
-        source.name AS source_name,
-        elementId(target) AS target_id,
-        target.name AS target_name,
-        elementId(r) AS relation_id,
-        type(r) AS relation_type
-    `;
-
-    const result = await this.makeRequest(query, {
-      source: payload.source,
-      target: payload.target,
-    });
-
-    if (result.records.length === 0) {
-      throw new HttpException('Failed to create edge', HttpStatus.BAD_REQUEST);
-    }
-
-    const record = result.records[0];
-
-    return {
-      message: 'Edge created successfully',
-      source_company: {
-        id: record.get('source_id'),
-        name: record.get('source_name'),
-      },
-      target_company: {
-        id: record.get('target_id'),
-        name: record.get('target_name'),
-      },
-      relationship: {
-        id: record.get('relation_id'),
-        type: record.get('relation_type'),
-      },
+      company_to_percents: {},
     };
   }
 
@@ -292,7 +168,7 @@ export class GraphService {
     )
     `;
 
-    const response = this.makeRequest(query, {
+    await this.makeRequest(query, {
       company_ticker: payload.ticker,
       company_name: payload.name,
       company_sector: payload.sector,
