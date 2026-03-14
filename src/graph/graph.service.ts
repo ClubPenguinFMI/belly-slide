@@ -108,8 +108,8 @@ export class GraphService {
       if (relationId && targetId) {
         edgesMap.set(relationId, {
           id: relationId,
-          source: sourceId,
-          target: targetId,
+          source: 'hello',
+          target: 'top',
           type: record.get('relation_type'),
           properties:
             (record.get('relation_props') as Record<string, unknown>) ?? {},
@@ -129,9 +129,10 @@ export class GraphService {
     `;
     result = await this.makeRequest(query, { entity_ids: entity_ids });
 
-    const connectedNodes = result.records.map(
-      (record) => record.get('common_node_ticker') as string,
-    );
+    const connectedNodes =
+      result.records.map(
+        (record) => record.get('common_node_ticker') as string,
+      ) ?? [];
 
     const correlations = this.stock_service.corelations(
       filters,
@@ -156,17 +157,17 @@ export class GraphService {
     // 3. Process the "sells_to" array
     FOREACH (ticker IN $sells_to |
         // Match or create the target company
-        MERGE (target:Company {ticker: $ticker})
+        MERGE (target:Company {ticker: ticker})
         // ONLY if it was just created, set the sector to Unknown
         ON CREATE SET target.sector = $default_sector
         // Match or create the relationship
         MERGE (main)-[:${GraphRelationshipType.SELLS_TO}]->(target)
     )
-    
+    //
     // 4. Process the "buys_from" array
     FOREACH (ticker IN $buys_from |
         // Match or create the supplier company
-        MERGE (supplier:Company {ticker: $ticker})
+        MERGE (supplier:Company {ticker: ticker})
         // ONLY if it was just created, set the sector to Unknown
         ON CREATE SET supplier.sector = $default_sector
         // Match or create the relationship

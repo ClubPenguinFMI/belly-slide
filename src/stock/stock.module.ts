@@ -1,4 +1,8 @@
 import { Module } from '@nestjs/common';
+import { StockService } from './stock.service';
 
-@Module({})
+@Module({
+  providers: [StockService],
+  exports: [StockService],
+})
 export class StockModule {}

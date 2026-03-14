@@ -18,7 +18,7 @@ export class GraphController {
   }
 
   @Post('/company')
-  getCompany(@Body() payload: PostCompanyRequest): Promise<CompanyResponse> {
+  createCompany(@Body() payload: PostCompanyRequest): Promise<CompanyResponse> {
     return this.graphService.createCompany(payload);
   }
 }

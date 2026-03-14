@@ -63,6 +63,6 @@ export class StockService {
   }
 
   public getStockData(ticker: string): number[] {
-    return tickerMap[ticker as keyof typeof tickerMap];
+    return tickerMap[ticker as keyof typeof tickerMap] ?? [];
   }
 }
