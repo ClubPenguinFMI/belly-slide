@@ -6,13 +6,14 @@ import {
   PostCompanyRequest,
 } from './dto/graph.dto';
 import { GraphService } from './graph.service';
+import { Portfolio } from '../portfolio/dto/portfolio.dto';
 
 @Controller()
 export class GraphController {
   constructor(private readonly graphService: GraphService) {}
 
   @Post('/graph')
-  getGraph(@Body() filters: GraphFilterItem[]): Promise<GraphResponse> {
+  getGraph(@Body() filters: Portfolio[]): Promise<GraphResponse> {
     return this.graphService.getGraph(filters);
   }
 

@@ -29,7 +29,7 @@ export class GraphEdge {
 export class GraphResponse {
   nodes!: GraphNode[];
   edges!: GraphEdge[];
-  company_to_percents!: Record<string, number>;
+  correlations!: Map<string, number>;
 }
 
 export class CreateEdgeDto {

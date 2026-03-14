@@ -1,8 +1,6 @@
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Driver, QueryResult } from 'neo4j-driver';
 import {
-  CreateCompanyRelationRequest,
-  CreateEdgeDto,
   GraphEdge,
   GraphFilterItem,
   GraphNode,
@@ -11,12 +9,15 @@ import {
 } from './dto/graph.dto';
 import { NEO4J_DATABASE_NAME, NEO4J_DRIVER } from './neo4j.provider';
 import { CompanySector, GraphRelationshipType } from './dto/graph.enums';
+import { StockService } from '../stock/stock.service';
+import { Portfolio } from '../portfolio/dto/portfolio.dto';
 
 @Injectable()
 export class GraphService {
   constructor(
     @Inject(NEO4J_DRIVER) private readonly driver: Driver,
     @Inject(NEO4J_DATABASE_NAME) private readonly database: string,
+    @Inject(StockService) private readonly stock_service: StockService,
   ) {}
 
   private async makeRequest(
@@ -48,7 +49,7 @@ export class GraphService {
     return cleaned;
   }
 
-  async getGraph(filters: GraphFilterItem[]): Promise<GraphResponse> {
+  async getGraph(filters: Portfolio[]): Promise<GraphResponse> {
     let query = `
       MATCH (seed:Company)
       WHERE seed.ticker IN $entity_ids
@@ -67,7 +68,7 @@ export class GraphService {
         properties(r) AS relation_props
     `;
 
-    const entity_ids = filters.map((f) => f.entity_id);
+    const entity_ids = filters.map((f) => f.ticker);
     let result = await this.makeRequest(query, { entity_ids: entity_ids });
 
     console.log(result.records);
@@ -132,10 +133,15 @@ export class GraphService {
       (record) => record.get('common_node_ticker') as string,
     );
 
+    const correlations = this.stock_service.corelations(
+      filters,
+      connectedNodes,
+    );
+
     return {
       nodes: Array.from(nodesMap.values()),
       edges: Array.from(edgesMap.values()),
-      company_to_percents: {},
+      correlations: correlations,
     };
   }
 
