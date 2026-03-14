@@ -18,7 +18,10 @@ export class PortfolioController {
   @Get('precomputed')
   public getPrecomputedPortfolio() {
     return precomputedData as unknown as {
-      ticker: string;
+      ticker: {
+        shortName: string;
+        longName: string;
+      };
       valueInvested: number;
       percentage: number;
     }[];
