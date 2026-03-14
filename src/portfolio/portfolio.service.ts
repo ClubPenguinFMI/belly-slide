@@ -12,7 +12,7 @@ export class PortfolioService {
   private async getTickerData(
     auth: string,
     server: string,
-  ): Promise<Map<string, string>> {
+  ): Promise<Map<string, { shortName: string; longName: string }>> {
     const tickerData = await typedFetch<[TickerData]>(
       `https://${server}.trading212.com/api/v0/equity/metadata/instruments`,
       {
@@ -23,7 +23,12 @@ export class PortfolioService {
       },
     );
 
-    return new Map(tickerData.map((data) => [data.ticker, data.shortName]));
+    return new Map(
+      tickerData.map((data) => [
+        data.ticker,
+        { shortName: data.shortName, longName: data.name },
+      ]),
+    );
   }
 
   public async getRealPortfolio(
@@ -52,7 +57,10 @@ export class PortfolioService {
       const tickerMap = await this.getTickerData(auth, server);
 
       return tradingData.map((pos: Position) => ({
-        ticker: tickerMap.get(pos.instrument.ticker) || pos.instrument.ticker,
+        ticker: tickerMap.get(pos.instrument.ticker) || {
+          shortName: pos.instrument.ticker,
+          longName: undefined,
+        },
         valueInvested: pos.quantity * pos.currentPrice,
         percentage:
           totalInvestment > 0
