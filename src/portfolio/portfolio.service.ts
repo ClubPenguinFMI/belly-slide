@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Position, TickerData } from './dto/trading-response.dto';
 import { typedFetch } from 'src/utils/typedFetch';
+import { Portfolio } from './dto/portfolio.dto';
 
 @Injectable()
 export class PortfolioService {
@@ -25,7 +26,11 @@ export class PortfolioService {
     return new Map(tickerData.map((data) => [data.ticker, data.shortName]));
   }
 
-  public async getRealPortfolio(token: string, secret: string, server: string) {
+  public async getRealPortfolio(
+    token: string,
+    secret: string,
+    server: string,
+  ): Promise<Portfolio[]> {
     try {
       const auth = PortfolioService.buildAuth(token, secret);
       const tradingData = await typedFetch<[Position]>(
@@ -53,6 +58,7 @@ export class PortfolioService {
           totalInvestment > 0
             ? (pos.quantity * pos.currentPrice * 100) / totalInvestment
             : 0,
+        quantity: pos.quantity,
       }));
     } catch (err) {
       throw new UnauthorizedException(
