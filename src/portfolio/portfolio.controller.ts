@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { PortfolioService } from './portfolio.service';
 import precomputedData from './data/precomputed.json';
 
@@ -7,8 +7,12 @@ export class PortfolioController {
   constructor(private readonly portfolioService: PortfolioService) {}
 
   @Get('real')
-  public getRealPortfolio() {
-    return this.portfolioService.getRealPortfolio();
+  public getRealPortfolio(
+    @Query('token') token: string,
+    @Query('secret') secret: string,
+    @Query('server') server: string,
+  ) {
+    return this.portfolioService.getRealPortfolio(token, secret, server);
   }
 
   @Get('precomputed')

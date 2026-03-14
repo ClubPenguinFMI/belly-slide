@@ -1,0 +1,3 @@
+
+CREATE CONSTRAINT company_ticker_unique IF NOT EXISTS
+FOR (c:Company) REQUIRE c.ticker IS UNIQUE;

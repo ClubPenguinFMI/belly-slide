@@ -1,0 +1,102 @@
+[
+  {
+    "source_company_name": "Acme Corp",
+    "target_company_name": "TechStart LLC",
+    "relation_type": "invested_in"
+  },
+  {
+    "source_company_name": "Acme Corp",
+    "target_company_name": "GreenGrid Energy",
+    "relation_type": "partnered_with"
+  },
+  {
+    "source_company_name": "TechStart LLC",
+    "target_company_name": "CloudScale Systems",
+    "relation_type": "acquired"
+  },
+  {
+    "source_company_name": "GreenGrid Energy",
+    "target_company_name": "SolarWind Industries",
+    "relation_type": "supplier_of"
+  },
+  {
+    "source_company_name": "CloudScale Systems",
+    "target_company_name": "DataForge Labs",
+    "relation_type": "invested_in"
+  },
+  {
+    "source_company_name": "DataForge Labs",
+    "target_company_name": "NeuralStream AI",
+    "relation_type": "partnered_with"
+  },
+  {
+    "source_company_name": "NeuralStream AI",
+    "target_company_name": "VisionEdge Robotics",
+    "relation_type": "supplier_of"
+  },
+  {
+    "source_company_name": "VisionEdge Robotics",
+    "target_company_name": "AutoMotion Dynamics",
+    "relation_type": "partnered_with"
+  },
+  {
+    "source_company_name": "AutoMotion Dynamics",
+    "target_company_name": "DriveCore Technologies",
+    "relation_type": "invested_in"
+  },
+  {
+    "source_company_name": "DriveCore Technologies",
+    "target_company_name": "QuantumStack Computing",
+    "relation_type": "partnered_with"
+  },
+  {
+    "source_company_name": "QuantumStack Computing",
+    "target_company_name": "NanoLogic Semiconductors",
+    "relation_type": "supplier_of"
+  },
+  {
+    "source_company_name": "NanoLogic Semiconductors",
+    "target_company_name": "CircuitWave Electronics",
+    "relation_type": "acquired"
+  },
+  {
+    "source_company_name": "CircuitWave Electronics",
+    "target_company_name": "BlueRiver Networks",
+    "relation_type": "invested_in"
+  },
+  {
+    "source_company_name": "BlueRiver Networks",
+    "target_company_name": "SkyLink Communications",
+    "relation_type": "partnered_with"
+  },
+  {
+    "source_company_name": "SkyLink Communications",
+    "target_company_name": "Orbital Data Systems",
+    "relation_type": "supplier_of"
+  },
+  {
+    "source_company_name": "Orbital Data Systems",
+    "target_company_name": "AstroCompute Labs",
+    "relation_type": "invested_in"
+  },
+  {
+    "source_company_name": "AstroCompute Labs",
+    "target_company_name": "DeepSpace Analytics",
+    "relation_type": "partnered_with"
+  },
+  {
+    "source_company_name": "DeepSpace Analytics",
+    "target_company_name": "CosmicAI Research",
+    "relation_type": "acquired"
+  },
+  {
+    "source_company_name": "CosmicAI Research",
+    "target_company_name": "NovaTech Solutions",
+    "relation_type": "supplier_of"
+  },
+  {
+    "source_company_name": "NovaTech Solutions",
+    "target_company_name": "Acme Corp",
+    "relation_type": "partnered_with"
+  }
+]
