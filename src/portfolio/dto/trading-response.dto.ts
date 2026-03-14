@@ -26,3 +26,16 @@ export interface WalletImpact {
   unrealizedProfitLoss: number;
   fxImpact: number | null;
 }
+
+export interface TickerData {
+  ticker: string;
+  type: string;
+  workingScheduleId: number;
+  isin: string;
+  currencyCode: string;
+  name: string;
+  shortName: string;
+  maxOpenQuantity: number;
+  extendedHours: boolean;
+  addedOn: string; // ISO datetime
+}
