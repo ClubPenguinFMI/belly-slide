@@ -229,8 +229,8 @@ export class GraphService {
 
   async createEdge(edge: GraphEdge) {
     const query = `
-    MATCH (a:Company {ticker: $ticker1})
-    MATCH (b:Company {ticker: $ticker2})
+    MERGE (a:Company {ticker: $ticker1})
+    MERGE (b:Company {ticker: $ticker2})
     MERGE (a)-[r:BUYS_FROM]->(b)
     RETURN r
     `;
