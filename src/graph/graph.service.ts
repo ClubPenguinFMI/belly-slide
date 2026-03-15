@@ -161,7 +161,26 @@ export class GraphService {
       edges: Array.from(edgesMap.values()),
       correlations,
       portfolioCorrelations,
+      portfolioDiversificationIndex: this.diversificationIndex(
+        filters,
+        portfolioCorrelations,
+      ),
     };
+  }
+
+  private diversificationIndex(
+    portfolio: Portfolio[],
+    correlations: Map<string, number>,
+  ) {
+    const weightedSum = Object.entries(correlations).reduce(
+      (acc, [ticker, corr]) => {
+        const item = portfolio.find((p) => p.ticker === ticker);
+        return acc + (item!.percentage * corr) / 100;
+      },
+      0,
+    );
+
+    return 1 - weightedSum;
   }
 
   async createCompany(payload: PostCompanyRequest) {

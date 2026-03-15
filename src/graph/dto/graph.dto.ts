@@ -33,6 +33,7 @@ export class GraphResponse {
   edges!: GraphEdge[];
   correlations!: Map<string, number>;
   portfolioCorrelations!: Map<string, number>;
+  portfolioDiversificationIndex!: number;
 }
 
 export class CreateEdgeDto {
