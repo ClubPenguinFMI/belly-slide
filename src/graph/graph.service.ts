@@ -2,7 +2,6 @@ import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Driver, QueryResult } from 'neo4j-driver';
 import {
   GraphEdge,
-  GraphFilterItem,
   GraphNode,
   GraphResponse,
   PostCompanyRequest,
@@ -18,7 +17,7 @@ export class GraphService {
     @Inject(NEO4J_DRIVER) private readonly driver: Driver,
     @Inject(NEO4J_DATABASE_NAME) private readonly database: string,
     @Inject(StockService) private readonly stock_service: StockService,
-  ) {}
+  ) { }
 
   private async makeRequest(
     query: string,
@@ -52,7 +51,7 @@ export class GraphService {
   async getGraph(filters: Portfolio[]): Promise<GraphResponse> {
     let query = `
       MATCH (seed:Company)
-      WHERE seed.ticker IN $entity_ids
+      WHERE seed.ticker IN $portfolio_tickers
       MATCH (seed)-[*0..]-(n:Company)
       WITH collect(DISTINCT n) AS nodes
       UNWIND nodes AS n
@@ -68,10 +67,10 @@ export class GraphService {
         properties(r) AS relation_props
     `;
 
-    const entity_ids = filters.map((f) => f.ticker);
-    let result = await this.makeRequest(query, { entity_ids: entity_ids });
-
-    console.log(result.records);
+    const portfolio_tickers = filters.map((f) => f.ticker);
+    let result = await this.makeRequest(query, {
+      portfolio_tickers: portfolio_tickers,
+    });
 
     const nodesMap = new Map<string, GraphNode>();
     const edgesMap = new Map<string, GraphEdge>();
@@ -108,8 +107,8 @@ export class GraphService {
       if (relationId && targetId) {
         edgesMap.set(relationId, {
           id: relationId,
-          source: 'hello',
-          target: 'top',
+          source: sourceProps['ticker'] as string,
+          target: targetProps?.['ticker'] as string,
           type: record.get('relation_type'),
           properties:
             (record.get('relation_props') as Record<string, unknown>) ?? {},
@@ -118,16 +117,27 @@ export class GraphService {
     }
 
     query = `
-      MATCH (startNode:Company)
-      WHERE startNode.ticker IN $entity_ids
-      MATCH (startNode)-[*1..3]-(connectedNode)
-      WHERE startNode <> connectedNode
-      RETURN connectedNode.ticker AS common_node_ticker, 
-             count(DISTINCT startNode) AS neighbor_count
-      ORDER BY neighbor_count DESC
-      LIMIT 5
+     // 1. Define and "hold" the starting nodes
+    MATCH (startNodes:Company)
+    WHERE startNodes.ticker IN $portfolio_tickers
+    WITH collect(startNodes) AS startingSet
+    
+    // 2. Expand from those same nodes
+    UNWIND startingSet AS startNode
+    MATCH (startNode)-[*1..3]-(connectedNode)
+    
+    // 3. Filter out any node contained in the original starting set
+    WHERE NOT connectedNode IN startingSet
+    
+    // 4. Aggregate and return
+    RETURN connectedNode.ticker AS common_node_ticker, 
+           count(DISTINCT startNode) AS neighbor_count
+    ORDER BY neighbor_count DESC
+    LIMIT 5
     `;
-    result = await this.makeRequest(query, { entity_ids: entity_ids });
+    result = await this.makeRequest(query, {
+      portfolio_tickers: portfolio_tickers,
+    });
 
     const connectedNodes =
       result.records.map(

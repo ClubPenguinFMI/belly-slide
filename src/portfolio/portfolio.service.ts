@@ -61,10 +61,10 @@ export class PortfolioService {
       const tickerMap = this.getTickerData();
 
       return tradingData.map((pos: Position) => ({
-        ticker: tickerMap.get(pos.instrument.ticker) || {
-          shortName: pos.instrument.ticker,
-          longName: undefined,
-        },
+        ticker:
+          tickerMap.get(pos.instrument.ticker)?.shortName ||
+          pos.instrument.ticker,
+        name: tickerMap.get(pos.instrument.ticker)?.longName || 'Unknown',
         valueInvested: pos.quantity * pos.currentPrice,
         percentage:
           totalInvestment > 0

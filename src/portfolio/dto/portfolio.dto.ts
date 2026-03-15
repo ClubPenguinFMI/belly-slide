@@ -1,8 +1,6 @@
 export interface Portfolio {
-  ticker: {
-    shortName: string;
-    longName: string | undefined;
-  };
+  ticker: string;
+  name: string | undefined;
   valueInvested: number;
   percentage: number;
   quantity: number;

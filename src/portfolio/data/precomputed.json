@@ -1,177 +1,133 @@
 [
   {
-    "ticker": {
-      "shortName": "WGLD",
-      "longName": "WisdomTree Core Physical Gold"
-    },
+    "ticker": "WGLD",
+    "name": "WisdomTree Core Physical Gold",
     "valueInvested": 311.31551199999996,
     "percentage": 3.1803219689166426
   },
   {
-    "ticker": {
-      "shortName": "XSOE",
-      "longName": "WisdomTree Emerging Markets ex-State Owned Enterprises UCITS ETF"
-    },
+    "ticker": "XSOE",
+    "name": "WisdomTree Emerging Markets ex-State Owned Enterprises UCITS ETF",
     "valueInvested": 61.02621924,
     "percentage": 0.6234287025469374
   },
   {
-    "ticker": {
-      "shortName": "HEDF",
-      "longName": "WisdomTree Europe Equity (Acc)"
-    },
+    "ticker": "HEDF",
+    "name": "WisdomTree Europe Equity (Acc)",
     "valueInvested": 89.68601231999999,
     "percentage": 0.91621003223837
   },
   {
-    "ticker": {
-      "shortName": "CEB1",
-      "longName": "iShares EUR Govt Bond 20yr Target Duration"
-    },
+    "ticker": "CEB1",
+    "name": "iShares EUR Govt Bond 20yr Target Duration",
     "valueInvested": 25.313581332000002,
     "percentage": 0.2585972613601015
   },
   {
-    "ticker": {
-      "shortName": "WCOA",
-      "longName": "Wisdomtree Enhanced Commodity"
-    },
+    "ticker": "WCOA",
+    "name": "Wisdomtree Enhanced Commodity",
     "valueInvested": 339.85850832000006,
     "percentage": 3.471910131909315
   },
   {
-    "ticker": {
-      "shortName": "BARC",
-      "longName": "Barclays"
-    },
+    "ticker": "BARC",
+    "name": "Barclays",
     "valueInvested": 7304.060771625,
     "percentage": 74.61647119691625
   },
   {
-    "ticker": {
-      "shortName": "SPY4",
-      "longName": "SPDR S&P 400 U.S. Mid Cap (Acc)"
-    },
+    "ticker": "SPY4",
+    "name": "SPDR S&P 400 U.S. Mid Cap (Acc)",
     "valueInvested": 40.861474,
     "percentage": 0.41743067221307056
   },
   {
-    "ticker": {
-      "shortName": "DTLA",
-      "longName": "iShares USD Treasury Bond 20+yr (Acc)"
-    },
+    "ticker": "DTLA",
+    "name": "iShares USD Treasury Bond 20+yr (Acc)",
     "valueInvested": 30.27159996,
     "percentage": 0.30924714855533497
   },
   {
-    "ticker": {
-      "shortName": "DGRA",
-      "longName": "WisdomTree US Quality Dividend Growth (Acc)"
-    },
+    "ticker": "DGRA",
+    "name": "WisdomTree US Quality Dividend Growth (Acc)",
     "valueInvested": 240.134905395,
     "percentage": 2.453158566449584
   },
   {
-    "ticker": {
-      "shortName": "DHSA",
-      "longName": "WisdomTree US Equity Income (Acc)"
-    },
+    "ticker": "DHSA",
+    "name": "WisdomTree US Equity Income (Acc)",
     "valueInvested": 89.04766425000001,
     "percentage": 0.9096888268612462
   },
   {
-    "ticker": {
-      "shortName": "HYEA",
-      "longName": "iShares Global High Yield Corp Bond (Acc)"
-    },
+    "ticker": "HYEA",
+    "name": "iShares Global High Yield Corp Bond (Acc)",
     "valueInvested": 42.45006504,
     "percentage": 0.4336593238201775
   },
   {
-    "ticker": {
-      "shortName": "DXJZ",
-      "longName": "WisdomTree Japan Equity"
-    },
+    "ticker": "DXJZ",
+    "name": "WisdomTree Japan Equity",
     "valueInvested": 86.23135989,
     "percentage": 0.8809181608262565
   },
   {
-    "ticker": {
-      "shortName": "WMGT",
-      "longName": "WisdomTree Megatrends (Acc)"
-    },
+    "ticker": "WMGT",
+    "name": "WisdomTree Megatrends (Acc)",
     "valueInvested": 92.19406845,
     "percentage": 0.9418317108957287
   },
   {
-    "ticker": {
-      "shortName": "DGSE",
-      "longName": "WisdomTree Emerging Markets SmallCap Dividend (Dist)"
-    },
+    "ticker": "DGSE",
+    "name": "WisdomTree Emerging Markets SmallCap Dividend (Dist)",
     "valueInvested": 41.58031725,
     "percentage": 0.4247741963615955
   },
   {
-    "ticker": {
-      "shortName": "IUS3",
-      "longName": "iShares S&P Small Cap 600 (Dist)"
-    },
+    "ticker": "IUS3",
+    "name": "iShares S&P Small Cap 600 (Dist)",
     "valueInvested": 29.43193737,
     "percentage": 0.30066936402960137
   },
   {
-    "ticker": {
-      "shortName": "EMGA",
-      "longName": "iShares JP Morgan EM Local Government Bond (Acc)"
-    },
+    "ticker": "EMGA",
+    "name": "iShares JP Morgan EM Local Government Bond (Acc)",
     "valueInvested": 38.53883891,
     "percentage": 0.39370320885909643
   },
   {
-    "ticker": {
-      "shortName": "SIE",
-      "longName": "Siemens"
-    },
+    "ticker": "SIE",
+    "name": "Siemens",
     "valueInvested": 69.852205995,
     "percentage": 0.7135927916858488
   },
   {
-    "ticker": {
-      "shortName": "EUNU",
-      "longName": "iShares Core Global Aggregate Bond (Dist)"
-    },
+    "ticker": "EUNU",
+    "name": "iShares Core Global Aggregate Bond (Dist)",
     "valueInvested": 278.574334738,
     "percentage": 2.845846231856253
   },
   {
-    "ticker": {
-      "shortName": "TFRN",
-      "longName": "WisdomTree USD Floating Rate Treasury Bond (Acc)"
-    },
+    "ticker": "TFRN",
+    "name": "WisdomTree USD Floating Rate Treasury Bond (Acc)",
     "valueInvested": 72.77882792,
     "percentage": 0.743490434572306
   },
   {
-    "ticker": {
-      "shortName": "WTEM",
-      "longName": "WisdomTree Global Quality Dividend Growth (Acc)"
-    },
+    "ticker": "WTEM",
+    "name": "WisdomTree Global Quality Dividend Growth (Acc)",
     "valueInvested": 182.55372953499997,
     "percentage": 1.8649235716459496
   },
   {
-    "ticker": {
-      "shortName": "QGRW",
-      "longName": "WisdomTree US Quality Growth (Acc)"
-    },
+    "ticker": "QGRW",
+    "name": "WisdomTree US Quality Growth (Acc)",
     "valueInvested": 150.793754875,
     "percentage": 1.5404715567285758
   },
   {
-    "ticker": {
-      "shortName": "IMBA",
-      "longName": "iShares US Mortgage Backed Securities (Acc)"
-    },
+    "ticker": "IMBA",
+    "name": "iShares US Mortgage Backed Securities (Acc)",
     "valueInvested": 172.24918866000002,
     "percentage": 1.7596549407517654
   }
