@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { PortfolioService } from './portfolio.service';
-import precomputedData from './data/precomputed2.json';
+import precomputedData from './data/precomputed3.json';
 import { Portfolio } from './dto/portfolio.dto';
 
 @Controller('portfolio')

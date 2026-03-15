@@ -1,0 +1,23 @@
+[
+  {
+    "ticker": "AMD",
+    "name": "Advanced Micro Devices",
+    "valueInvested": 193.39,
+    "quantity": 1,
+    "percentage": 20.368849005729692
+  },
+  {
+    "ticker": "NVDA",
+    "name": "Nvidia",
+    "valueInvested": 360.5,
+    "quantity": 2,
+    "percentage": 37.969750589821366
+  },
+  {
+    "ticker": "MSFT",
+    "name": "Microsoft",
+    "valueInvested": 395.55,
+    "quantity": 1,
+    "percentage": 41.66140040444894
+  }
+]
