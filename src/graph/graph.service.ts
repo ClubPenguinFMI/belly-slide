@@ -180,7 +180,7 @@ export class GraphService {
       0,
     );
 
-    return 1 - weightedSum;
+    return weightedSum;
   }
 
   async createCompany(payload: PostCompanyRequest) {
