@@ -1,21 +1,40 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Injectable } from '@nestjs/common';
 import { Portfolio } from 'src/portfolio/dto/portfolio.dto';
+import fs from 'fs';
+import path from 'path';
 
-import amzn from './data/AMZN.json';
-import googl from './data/GOOGL.json';
-import nvda from './data/NVDA.json';
-
-const convertTickerData = (tickerJson: typeof amzn) => {
-  return Object.entries(tickerJson['Time Series (Daily)']).map(([, v]) =>
+const convertTickerData = (tickerJson: any) => {
+  return Object.entries(tickerJson['Time Series (Daily)']).map(([, v]: any) =>
     Number(v['4. close']),
   );
 };
 
-const tickerMap = {
-  AMZN: convertTickerData(amzn),
-  GOOGL: convertTickerData(googl),
-  NVDA: convertTickerData(nvda),
-} as const;
+const loadJsonMap = (dir: string): Map<string, number[]> => {
+  const result = new Map<string, number[]>();
+
+  const files = fs.readdirSync(dir);
+
+  for (const file of files) {
+    const fullPath = path.join(dir, file);
+    const content = fs.readFileSync(fullPath, 'utf-8');
+    const parsed = JSON.parse(content) as unknown;
+
+    const filename = path.basename(file, '.json');
+    result.set(filename, convertTickerData(parsed));
+  }
+
+  return result;
+};
+
+// const tickerMap = {
+//   AMZN: convertTickerData(amzn),
+//   GOOGL: convertTickerData(googl),
+//   NVDA: convertTickerData(nvda),
+// } as const;
+
+const tickerMap = loadJsonMap(path.join(__dirname, '../../src/stock/data'));
 
 @Injectable()
 export class StockService {
@@ -63,6 +82,6 @@ export class StockService {
   }
 
   public getStockData(ticker: string): number[] {
-    return tickerMap[ticker as keyof typeof tickerMap] ?? [];
+    return tickerMap.get(ticker) ?? [];
   }
 }
