@@ -19,6 +19,7 @@ export class PortfolioController {
   public getPrecomputedPortfolio() {
     return precomputedData as unknown as {
       ticker: string;
+      name: string;
       valueInvested: number;
       percentage: number;
     }[];

@@ -1,18 +1,17 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import {
   CompanyResponse,
-  GraphFilterItem,
   GraphResponse,
   PostCompanyRequest,
 } from './dto/graph.dto';
 import { GraphService } from './graph.service';
 import { Portfolio } from '../portfolio/dto/portfolio.dto';
 
-@Controller()
+@Controller('graph')
 export class GraphController {
   constructor(private readonly graphService: GraphService) {}
 
-  @Post('/graph')
+  @Post('/')
   getGraph(@Body() filters: Portfolio[]): Promise<GraphResponse> {
     return this.graphService.getGraph(filters);
   }
