@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { Position, TickerData } from './dto/trading-response.dto';
+import { Position } from './dto/trading-response.dto';
 import { typedFetch } from 'src/utils/typedFetch';
 import { Portfolio } from './dto/portfolio.dto';
+
+import instrumentsData from './data/instruments_metadata.json';
 
 @Injectable()
 export class PortfolioService {
@@ -9,22 +14,21 @@ export class PortfolioService {
     return btoa(`${token}:${secret}`);
   }
 
-  private async getTickerData(
-    auth: string,
-    server: string,
-  ): Promise<Map<string, { shortName: string; longName: string }>> {
-    const tickerData = await typedFetch<[TickerData]>(
-      `https://${server}.trading212.com/api/v0/equity/metadata/instruments`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Basic ${auth}`,
-        },
-      },
-    );
+  private getTickerData() // auth: string,
+  // server: string,
+  : Map<string, { shortName: string; longName: string }> {
+    // const tickerData = await typedFetch<[TickerData]>(
+    //   `https://${server}.trading212.com/api/v0/equity/metadata/instruments`,
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //       Authorization: `Basic ${auth}`,
+    //     },
+    //   },
+    // );
 
     return new Map(
-      tickerData.map((data) => [
+      (instrumentsData as any[]).map((data) => [
         data.ticker,
         { shortName: data.shortName, longName: data.name },
       ]),
@@ -54,7 +58,7 @@ export class PortfolioService {
         0,
       );
 
-      const tickerMap = await this.getTickerData(auth, server);
+      const tickerMap = this.getTickerData();
 
       return tradingData.map((pos: Position) => ({
         ticker:
