@@ -1,6 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { PortfolioService } from './portfolio.service';
-import precomputedData from './data/precomputed.json';
+import precomputedData from './data/precomputed2.json';
+import { Portfolio } from './dto/portfolio.dto';
 
 @Controller('portfolio')
 export class PortfolioController {
@@ -16,12 +17,7 @@ export class PortfolioController {
   }
 
   @Get('precomputed')
-  public getPrecomputedPortfolio() {
-    return precomputedData as unknown as {
-      ticker: string;
-      name: string;
-      valueInvested: number;
-      percentage: number;
-    }[];
+  public getPrecomputedPortfolio(): Portfolio[] {
+    return precomputedData;
   }
 }

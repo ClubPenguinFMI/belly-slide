@@ -1,26 +1,30 @@
 [
   {
     "ticker": "AMD",
-    "name": "AMD",
+    "name": "Advanced Micro Devices",
     "valueInvested": 193.39,
-    "quantity": 1
+    "quantity": 1,
+    "percentage": 25.81596828236174
   },
   {
     "ticker": "AMZN",
-    "name": "AMZN",
+    "name": "Amazon",
     "valueInvested": 207.67,
-    "quantity": 1
+    "quantity": 1,
+    "percentage": 27.722230380050995
   },
   {
     "ticker": "GOOGL",
-    "name": "GOOGL",
+    "name": "Alphabet (Class A)",
     "valueInvested": 302.28,
-    "quantity": 1
+    "quantity": 1,
+    "percentage": 40.35188423596001
   },
   {
     "ticker": "INTC",
-    "name": "INTC",
+    "name": "Intel",
     "valueInvested": 45.77,
-    "quantity": 1
+    "quantity": 1,
+    "percentage": 6.109917101627266
   }
 ]
