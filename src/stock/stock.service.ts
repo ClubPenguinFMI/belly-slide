@@ -45,6 +45,7 @@ export class StockService {
     const account_data: number[] = [];
     for (let i = 0; i < portfolio.length; i++) {
       const { ticker, quantity } = portfolio[i];
+      console.log({ ticker, quantity });
       const data = this.getStockData(ticker);
       for (let j = 0; j < data.length; j++) {
         account_data[j] = (account_data[j] || 0) + data[j] * quantity;

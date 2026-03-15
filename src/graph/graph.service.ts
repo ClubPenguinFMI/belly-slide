@@ -85,6 +85,7 @@ export class GraphService {
           id: sourceId,
           name: String(sourceProps['name']),
           properties: sourceProps,
+          ticker: String(sourceProps['ticker']),
         });
       }
 
@@ -99,6 +100,7 @@ export class GraphService {
           id: targetId,
           name: String(targetProps?.['name']),
           properties: targetProps ?? {},
+          ticker: String(targetProps?.['ticker']),
         });
       }
 
@@ -149,10 +151,16 @@ export class GraphService {
       connectedNodes,
     );
 
+    const portfolioCorrelations = this.stock_service.corelations(
+      filters,
+      portfolio_tickers,
+    );
+
     return {
       nodes: Array.from(nodesMap.values()),
       edges: Array.from(edgesMap.values()),
-      correlations: correlations,
+      correlations,
+      portfolioCorrelations,
     };
   }
 

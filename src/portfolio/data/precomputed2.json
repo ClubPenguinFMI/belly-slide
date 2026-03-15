@@ -1,0 +1,26 @@
+[
+  {
+    "ticker": "AMD",
+    "name": "AMD",
+    "valueInvested": 193.39,
+    "quantity": 1
+  },
+  {
+    "ticker": "AMZN",
+    "name": "AMZN",
+    "valueInvested": 207.67,
+    "quantity": 1
+  },
+  {
+    "ticker": "GOOGL",
+    "name": "GOOGL",
+    "valueInvested": 302.28,
+    "quantity": 1
+  },
+  {
+    "ticker": "INTC",
+    "name": "INTC",
+    "valueInvested": 45.77,
+    "quantity": 1
+  }
+]

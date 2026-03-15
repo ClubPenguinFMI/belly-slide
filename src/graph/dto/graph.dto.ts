@@ -17,6 +17,7 @@ export class GraphNode {
   name!: string;
   sector?: CompanySector;
   ticker!: string;
+  properties!: Record<string, unknown>;
 }
 
 export class GraphEdge {
@@ -31,6 +32,7 @@ export class GraphResponse {
   nodes!: GraphNode[];
   edges!: GraphEdge[];
   correlations!: Map<string, number>;
+  portfolioCorrelations!: Map<string, number>;
 }
 
 export class CreateEdgeDto {
