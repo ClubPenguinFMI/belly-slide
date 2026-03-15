@@ -17,7 +17,7 @@ export class GraphService {
     @Inject(NEO4J_DRIVER) private readonly driver: Driver,
     @Inject(NEO4J_DATABASE_NAME) private readonly database: string,
     @Inject(StockService) private readonly stock_service: StockService,
-  ) {}
+  ) { }
 
   private async makeRequest(
     query: string,
@@ -107,8 +107,8 @@ export class GraphService {
       if (relationId && targetId) {
         edgesMap.set(relationId, {
           id: relationId,
-          source: 'hello',
-          target: 'top',
+          source: sourceProps['ticker'] as string,
+          target: targetProps?.['ticker'] as string,
           type: record.get('relation_type'),
           properties:
             (record.get('relation_props') as Record<string, unknown>) ?? {},
