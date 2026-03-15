@@ -17,7 +17,7 @@ export class GraphService {
     @Inject(NEO4J_DRIVER) private readonly driver: Driver,
     @Inject(NEO4J_DATABASE_NAME) private readonly database: string,
     @Inject(StockService) private readonly stock_service: StockService,
-  ) { }
+  ) {}
 
   private async makeRequest(
     query: string,
@@ -199,5 +199,39 @@ export class GraphService {
       name: payload.name,
       sector: payload.sector,
     };
+  }
+
+  async createNode(node: GraphNode) {
+    const query = `
+     // 1. Create or match the main company node
+    MERGE (main:Company {ticker: $company_ticker})
+    // 2. Set/update the sector for the main company
+    SET main.sector = $company_sector
+    SET main.name = $company_name
+    `;
+
+    await this.makeRequest(query, {
+      company_ticker: node.ticker,
+      company_name: node.name,
+      company_sector: node.sector ?? CompanySector.UNKNOWN,
+    });
+
+    return Promise.resolve('success');
+  }
+
+  async createEdge(edge: GraphEdge) {
+    const query = `
+    MATCH (a:Company {ticker: $ticker1})
+    MATCH (b:Company {ticker: $ticker2})
+    MERGE (a)-[r:BUYS_FROM]->(b)
+    RETURN r
+    `;
+
+    await this.makeRequest(query, {
+      ticker1: edge.source,
+      ticker2: edge.target,
+    });
+
+    return Promise.resolve('success');
   }
 }

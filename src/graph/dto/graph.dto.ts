@@ -13,9 +13,10 @@ export class CompanyResponse {
 }
 
 export class GraphNode {
-  id!: string;
+  id?: string;
   name!: string;
-  properties!: Record<string, unknown>;
+  sector?: CompanySector;
+  ticker!: string;
 }
 
 export class GraphEdge {
